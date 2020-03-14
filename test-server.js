@@ -39,7 +39,7 @@ async function execTests() {
 
     addTimeToReport();
 
-    setTimeout(() => execTests(), 30000);
+    setTimeout(() => execTests(), 10 * 60 * 1000);
 }
 
 // Exec tests & reports
