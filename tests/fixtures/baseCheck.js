@@ -63,7 +63,7 @@ module.exports = {
 
           const totalStake = res.value.replace('Total stake: ', '').split('ONE')[0];
 
-          browser.assert.equal(parseFloat(totalStake) > 0, false);
+          browser.assert.equal(parseFloat(totalStake) > 0, true);
         })
   },
 
