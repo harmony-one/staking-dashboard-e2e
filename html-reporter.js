@@ -11,7 +11,12 @@ const SCREENSHOT_PATH = process.env.SCREENSHORT_PATH || './reports/screenshots';
 
 module.exports = {
     write : function(results, options, done) {
-        const screenshots = recursive(SCREENSHOT_PATH).map(p => p.replace('reports/', ''));
+        let screenshots = [];
+        try {
+            screenshots = recursive(SCREENSHOT_PATH).map(p => p.replace('reports/', ''));
+        } catch (e) {
+            screenshots = [];
+        }
 
         // var reportFilename = options.filename_prefix + (Math.floor(Date.now() / 1000)) + '.html';
         var reportFilename = 'index.html';
