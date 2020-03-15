@@ -133,6 +133,26 @@
     <hr>
 {{/each}}
 
+<h2>Failures screenshots</h2>
+<table>
+{{#each screenshots}}
+    <tr>
+        <td>
+            {{@key}}
+        </td>
+        <td>
+            <a href="{{this}}" target="_blank">{{this}}</a>
+        </td>
+        <td>
+            <a href="{{this}}" target="_blank">
+                <img src="{{this}}"  width="100" height="auto" />
+            </a>
+        </td>
+    </tr>
+{{/each}}
+</table>
+<hr>
+
 <div id="nightwatch-logo"></div>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

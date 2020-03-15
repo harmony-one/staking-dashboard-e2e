@@ -1,8 +1,10 @@
 {
   "name": "e2e-staking-dashboard",
   "scripts": {
-    "test": "env NODE_ENV=test nightwatch --reporter html-reporter.js",
-    "server": "env NODE_ENV=test node ./server.js"
+    "test": "env NODE_ENV=production nightwatch --reporter html-reporter.js",
+    "serve": "env NODE_ENV=production node ./server.js",
+    "test:dev": "env NODE_ENV=development nightwatch --reporter html-reporter.js",
+    "serve:dev": "env NODE_ENV=development node ./server.js"
   },
   "devDependencies": {
     "chromedriver": "^2.36.0",
