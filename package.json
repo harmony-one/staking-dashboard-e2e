@@ -1,11 +1,8 @@
 {
   "name": "e2e-staking-dashboard",
   "scripts": {
-    "test--": "nightwatch --report ./html-reporter.js",
-    "test": "env NODE_ENV=test nightwatch",
-    "server": "env NODE_ENV=test node ./test-server.js",
-    "show-report": "nightwatch-html-reporter -d ./reports -t outlook -l 0",
-    "report": "nightwatch-html-reporter -d ./reports -t outlook -l 0 -b false -o ./index.html"
+    "test": "env NODE_ENV=test nightwatch --reporter html-reporter.js",
+    "server": "env NODE_ENV=test node ./server.js"
   },
   "devDependencies": {
     "chromedriver": "^2.36.0",
@@ -16,7 +13,7 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "express": "^4.17.1",
-    "nightwatch-html-reporter": "^2.0.6",
+    "recursive-readdir-synchronous": "0.0.4",
     "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }

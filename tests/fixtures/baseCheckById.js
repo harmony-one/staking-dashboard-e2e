@@ -3,17 +3,6 @@ const TEST_URL = process.env.TEST_URL || 'http://localhost:9080';
 console.log('Run test for: ', TEST_URL);
 
 module.exports = {
-  // 'Validators list' : function (browser) {
-  //   browser
-  //     .url('https://staking.harmony.one/validators')
-  //     //.waitForElementPresent('h4:contains("Total stake:")', 2000)
-  //     // .assert.containsText('.networkInfo-item h4:contains("Total stake")', 'Total stake:')
-  //     // .clickLinkContainingText('sign in')
-  //     // .waitForElementPresent('#user-repositories-list', 1000)
-  //     // .assert.containsText('#user-repositories-list', 'nightwatch-starter')
-  //     .end();
-  // },
-
     tags: ['Check all pages for ability to display'],
 
     'Main page is loaded': function(browser) {
@@ -67,7 +56,7 @@ module.exports = {
 
           const totalStake = res.value.replace('Total stake: ', '').split('ONE')[0];
 
-          browser.assert.equal(parseFloat(totalStake) > 0, true);
+          browser.assert.equal(parseFloat(totalStake) > 0, false);
         })
   },
 

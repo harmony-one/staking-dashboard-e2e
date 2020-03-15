@@ -1,3 +1,5 @@
+require('./env')
+
 const SCREENSHOT_PATH = process.env.SCREENSHORT_PATH || './reports/screenshots';
 const SELENIUM_HOST = process.env.SELENIUM_HUB_URL || '134.122.26.99' || 'localhost';
 const SELENIUM_PORT = process.env.SELENIUM_HUB_PORT || 4444;
