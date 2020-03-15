@@ -14,7 +14,7 @@ module.exports = {
   //     .end();
   // },
 
-    tags: ['Check all pages for ability to display'],
+    '@tags': ['Check all pages for ability to display'],
 
     'Main page is loaded': function(browser) {
         browser
