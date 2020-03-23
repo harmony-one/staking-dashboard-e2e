@@ -1,4 +1,5 @@
 const TEST_URL = process.env.TEST_URL || 'http://localhost:9080';
+const EXTENSION_ID = process.env.EXTENSION_ID || 'hjkehgpmikldmbgmnkedcgajiloiekjn';
 
 console.log('Run test for: ', TEST_URL);
 
@@ -8,7 +9,7 @@ const account = {
     phrase: 'wise category remind orbit short mimic sign adjust siege fossil swear elephant',
 }
 
-const extensionUrl = 'chrome-extension://bmmcdpdpebkojondchooohhanjkldcha/assets/popup.html';
+const extensionUrl = `chrome-extension://${EXTENSION_ID}/assets/popup.html`;
 
 module.exports = {
     'Open extension': function(browser) {
