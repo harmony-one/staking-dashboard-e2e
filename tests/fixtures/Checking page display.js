@@ -2,36 +2,36 @@ const TEST_URL = process.env.TEST_URL || 'http://localhost:9080';
 
 console.log('Run test for: ', TEST_URL);
 
-module.exports = {
-    '@tags': ['Check all pages for ability to display'],
-
+const test = {
     'Website is loaded': function(browser) {
-        browser
+        return browser
             .url(TEST_URL)
             .waitForElementPresent('.app-header', 4000)
     },
 
     'Go to Networks page': function(browser) {
-        browser.waitForElementPresent('#menu_item_networks', 4000)
+        return browser.waitForElementPresent('#menu_item_networks', 4000)
         .click('#menu_item_networks');
     },
 
   'Networks list is loaded and not empty': function(browser) {
-    browser.waitForElementPresent('.network-list', 4000)
+        return browser.waitForElementPresent('.network-list', 4000)
   },
 
     'Select "Open Staking Testnet"': function(browser) {
-        browser.waitForElementPresent('#network_harmony-open-staking', 4000)
-        .click('#network_harmony-open-staking')
+        return browser
+            .waitForElementPresent('#network_harmony-open-staking', 4000)
+            .click('#network_harmony-open-staking')
     },
 
     'Go to Validators page': function(browser) {
-        browser.waitForElementPresent('#menu_item_validators', 4000)
-        .click('#menu_item_validators');
+        return browser
+            .waitForElementPresent('#menu_item_validators', 4000)
+            .click('#menu_item_validators');
     },
 
     'Validators list is loaded and not empty': function(browser) {
-        browser
+        return browser
             .waitForElementPresent('#validators_table', 10000)
             .waitForElementNotPresent('.tm-data-msg__text', 10000)
             .getText('#validators_table .total-tx-num', function(result) {
@@ -41,7 +41,7 @@ module.exports = {
     },
 
     'Validator list show average non-zero stakes': function(browser) {
-        browser
+        return browser
             .waitForElementPresent('.average_stake_cell', 4000)
             .elements('css selector', '.average_stake_cell', (res) => {
                 res.value.map(e => e.ELEMENT)
@@ -65,18 +65,33 @@ module.exports = {
   // },
 
     'Click to first Validator row': function(browser) {
-        browser
+        return browser
             .waitForElementPresent('#validators_table .data-table tbody .li-validator:nth-child(1)', 4000)
             .click('#validators_table .data-table tbody .li-validator:nth-child(1)')
     },
 
     'Validator page is loaded': function(browser) {
-        browser
+        return browser
             .waitForElementNotPresent('.tm-data-msg__text', 10000)
             .waitForElementPresent('.validator-info h2', 4000)
             .getText('.validator-info h2', (res) => {
                 browser.assert.equal(res.value.length > 0, true);
             })
-            .end();
+    },
+
+    'End': function (browser) {
+        browser.end();
     }
 };
+
+for (let key in test) {
+    const originalFunc = test[key];
+
+    test[key] = function (browser) {
+        originalFunc(browser);
+
+        browser.saveScreen(key);
+    }
+}
+
+module.exports = test;

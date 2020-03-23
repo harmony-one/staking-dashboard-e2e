@@ -3,7 +3,7 @@ const EXTENSION_ID = process.env.EXTENSION_ID || 'hjkehgpmikldmbgmnkedcgajiloiek
 
 console.log('Run test for: ', TEST_URL);
 
-const recoverAccount = require('../cases/recoverAccount');
+const fillRecoveryForm = require('../cases/fillRecoveryForm');
 const checkAccountInList = require('../cases/checkAccountInList');
 
 const account = {
@@ -14,7 +14,7 @@ const account = {
 
 const extensionUrl = `chrome-extension://${EXTENSION_ID}/assets/popup.html`;
 
-module.exports = {
+const test = {
     'Open extension': function(browser) {
         browser
             .url(extensionUrl)
@@ -28,18 +28,28 @@ module.exports = {
             .saveScreen('Accounts list is empty');
     },
 
+    'Fill recovery form': function (browser) {
+        fillRecoveryForm(browser, extensionUrl, account);
+    },
+
     'Recover account by phrase': function(browser) {
-        recoverAccount(browser, extensionUrl, account, 'Recover account by phrase');
+        browser
+            .click('button.create-address-btn')
+            .waitForElementNotPresent('span.input-error', 4000)
     },
 
     'Recovered account display in list': function(browser) {
-        checkAccountInList(browser, extensionUrl, account, 'Account display in list');
+        checkAccountInList(browser, extensionUrl, account);
     },
 
-    'Sign in with extension': function(browser) {
+    'Open Sign in page': function (browser) {
         browser
             .url(TEST_URL + '/extension')
             .assert.containsText('h2.session-title', 'Use Harmony Browser Extension')
+    },
+
+    'Click to "Use Account" button': function(browser) {
+        browser
             .waitForElementPresent('li.account', 4000)
             .click('button.account-button')
     },
@@ -50,6 +60,21 @@ module.exports = {
             .click('#menu_item_portfolio')
             .waitForElementPresent('div.total-atoms', 4000)
             .assert.containsText('div.total-atoms > h2.total-atoms__value', '0')
-            .end()
     },
+
+    'End': function (browser) {
+        browser.end();
+    }
 };
+
+for (let key in test) {
+    const originalFunc = test[key];
+
+    test[key] = function (browser) {
+        originalFunc(browser);
+
+        browser.saveScreen(key);
+    }
+}
+
+module.exports = test;

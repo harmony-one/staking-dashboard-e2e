@@ -82,44 +82,58 @@
 {{#each results.modules}}
     <h2>{{@key}}</h2>
 
-    {{#each this.completed}}
-        <h3>{{@key}}</h3>
-        <ul class="assertions">
-            {{#each this.assertions}}
-                <li>
-                    {{#if failure}}
-                        <span class="error">&#10006;</span>
-                    {{else}}
-                        <span class="success">&#10004;</span>
-                    {{/if}}
+    <table>
+        <tbody>
+            {{#each this.completed}}
+                <tr>
+                    <td>
+                        <h3>{{@key}}</h3>
 
-                    {{this.message}}
+                        <ul class="assertions">
+                            {{#each this.assertions}}
+                                <li>
+                                    {{#if failure}}
+                                        <span class="error">&#10006;</span>
+                                    {{else}}
+                                        <span class="success">&#10004;</span>
+                                    {{/if}}
 
-                    {{#if this.failure}}
-                        {{this.failure}}
-                    {{/if}}
+                                    {{this.message}}
 
-                    {{#if this.stacktrace}}
-                        <div class="stacktrace">
-                            <a href="#">view stacktrace</a>
-                            <code><pre>{{this.stacktrace}}</pre></code>
-                        </div>
-                    {{/if}}
-                </li>
+                                    {{#if this.failure}}
+                                        {{this.failure}}
+                                    {{/if}}
+
+                                    {{#if this.stacktrace}}
+                                        <div class="stacktrace">
+                                            <a href="#">view stacktrace</a>
+                                            <code><pre>{{this.stacktrace}}</pre></code>
+                                        </div>
+                                    {{/if}}
+                                </li>
+                            {{/each}}
+                        </ul>
+
+                        <p>
+                            {{#if this.failed}}
+                                <span class="error"><strong>FAILED:</strong></span>
+                                <span class="error"><strong>{{this.failed}}</strong></span> assertions failed and
+                                <span class="success"><strong>{{this.passed}}</span></strong> passed. ({{this.time}}s)
+                            {{else}}
+                                <span class="success"><strong>OK.</strong></span>
+                                <span class="success"><strong>{{this.passed}}</strong></span> assertions passed. ({{this.time}}s)
+                            {{/if}}
+                        </p>
+                    </td>
+
+                    <td>
+                        <a href="screenshots/{{@key}}.png" target="_blank">
+                            <img src="screenshots/{{@key}}.png" width="200" />
+                        </a>
+                    </td>
             {{/each}}
-        </ul>
-
-        <p>
-            {{#if this.failed}}
-                <span class="error"><strong>FAILED:</strong></span>
-                <span class="error"><strong>{{this.failed}}</strong></span> assertions failed and
-                <span class="success"><strong>{{this.passed}}</span></strong> passed. ({{this.time}}s)
-            {{else}}
-                <span class="success"><strong>OK.</strong></span>
-                <span class="success"><strong>{{this.passed}}</strong></span> assertions passed. ({{this.time}}s)
-            {{/if}}
-        </p>
-    {{/each}}
+        </tbody>
+    </table>
 
     {{#if this.skipped}}
         <h4>skipped</h4>
@@ -133,7 +147,7 @@
     <hr>
 {{/each}}
 
-<h2>Failures screenshots</h2>
+<h2>Failed screenshots</h2>
 <table>
 {{#each screenshots}}
     <tr>

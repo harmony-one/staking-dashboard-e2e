@@ -13,7 +13,9 @@ module.exports = {
     write : function(results, options, done) {
         let screenshots = [];
         try {
-            screenshots = recursive(SCREENSHOT_PATH).map(p => p.replace('reports/', ''));
+            screenshots = recursive(SCREENSHOT_PATH)
+                .map(p => p.replace('reports/', ''))
+                .filter(p => p.includes('FAILED'));
         } catch (e) {
             screenshots = [];
         }

@@ -6,7 +6,7 @@ const getElementTextAsync = (browser, id) => {
     });
 }
 
-module.exports = function (browser, extensionUrl, params, screenshotName) {
+module.exports = function (browser, extensionUrl, params) {
     return browser
         .url(extensionUrl)
         .elements('css selector', 'div.account__name', (res) => {
@@ -17,5 +17,4 @@ module.exports = function (browser, extensionUrl, params, screenshotName) {
             )
                 .then(names => browser.assert.ok(names.some(name => name === params.name)))
         })
-        .saveScreen(screenshotName)
 };
