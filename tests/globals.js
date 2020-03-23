@@ -2,7 +2,7 @@ require('../env')
 
 module.exports = {
   beforeEach(browser, done) {
-    console.log('Executing the global `beforeEach`');
+    // console.log('Executing the global `beforeEach`');
     done();
   }
 };
