@@ -3,6 +3,9 @@ const EXTENSION_ID = process.env.EXTENSION_ID || 'hjkehgpmikldmbgmnkedcgajiloiek
 
 console.log('Run test for: ', TEST_URL);
 
+const recoverAccount = require('../cases/recoverAccount');
+const checkAccountInList = require('../cases/checkAccountInList');
+
 const account = {
     name: 'test-account',
     password: '1234567890',
@@ -19,22 +22,18 @@ module.exports = {
             .waitForElementPresent('body', 4000)
     },
 
-    'Accounts does not created': function(browser) {
+    'Accounts list is empty': function(browser) {
         browser
             .waitForElementNotPresent('div.account__name', 4000)
+            .saveScreen('Accounts list is empty');
     },
 
     'Recover account by phrase': function(browser) {
-        browser
-            .clickLinkContainingText('Recover account')
-            .setValue('input[name=account]', account.name)
-            .setValue('input[name=password]', account.password)
-            .setValue('input[name=confirm-password]', account.password)
-            .setValue('div[name=phrase] textarea', account.phrase)
-            .click('button.create-address-btn')
-            .waitForElementNotPresent('span.input-error', 4000)
-            .assert.containsText('div.account__name', account.name)
-            // .clickLinkContainingText('Go to Harmony')
+        recoverAccount(browser, extensionUrl, account, 'Recover account by phrase');
+    },
+
+    'Recovered account display in list': function(browser) {
+        checkAccountInList(browser, extensionUrl, account, 'Account display in list');
     },
 
     'Sign in with extension': function(browser) {
@@ -49,6 +48,7 @@ module.exports = {
         browser
             .waitForElementPresent('div.user-box', 4000)
             .click('#menu_item_portfolio')
+            .waitForElementPresent('div.total-atoms', 4000)
             .assert.containsText('div.total-atoms > h2.total-atoms__value', '0')
             .end()
     },
