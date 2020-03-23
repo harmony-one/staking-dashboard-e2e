@@ -42,11 +42,21 @@ module.exports = {
         chromeOptions: {
           args: [
             '--no-sandbox',
-            'incognito',
-            'disable-extensions'
-          ]
+            // 'incognito',
+            "--load-extension=/Users/yuriy/pro/wallet-extension/build",
+            // 'disable-extensions'
+          ],
+          // extensions: ["/Users/yuriy/pro/wallet-extension/build.crx"]
         }
       }
     }
   }
 };
+
+// chromeOptions : {
+//   extensions: [encode('./extension_1_5.crx')]
+// }
+// function encode(file) {
+//   var stream = require('fs').readFileSync(file);
+//   return new Buffer(stream).toString('base64');
+// }

@@ -53,16 +53,16 @@ module.exports = {
             })
     },
 
-  'Total stake display and non-zero': function(browser) {
-    browser
-        .waitForElementNotPresent('.tm-data-msg__text', 4000)
-        .waitForElementPresent('#validators_total_stake', 4000)
-        .getText('#validators_total_stake', (res) => {
-          const totalStake = res.value.split(': ')[1].split('ONE')[0];
-
-          browser.assert.ok(parseFloat(totalStake.replace(',', '.')) > 0);
-        })
-  },
+  // 'Total stake display and non-zero': function(browser) {
+  //   browser
+  //       .waitForElementNotPresent('.tm-data-msg__text', 4000)
+  //       .waitForElementPresent('#validators_total_stake', 4000)
+  //       .getText('#validators_total_stake', (res) => {
+  //         const totalStake = res.value.split(': ')[1].split('ONE')[0];
+  //
+  //         browser.assert.ok(parseFloat(totalStake.replace(',', '.')) > 0);
+  //       })
+  // },
 
     'Click to first Validator row': function(browser) {
         browser
