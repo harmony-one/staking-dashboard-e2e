@@ -63,14 +63,14 @@ const test = {
     },
 };
 
-for (let key in test) {
-    const originalFunc = test[key];
-
-    test[key] = function (browser) {
-        originalFunc(browser);
-
-        browser.saveScreen(key);
-    }
-}
+// for (let key in test) {
+//     const originalFunc = test[key];
+//
+//     test[key] = function (browser) {
+//         originalFunc(browser);
+//
+//         browser.saveScreen(key);
+//     }
+// }
 
 module.exports = test;
