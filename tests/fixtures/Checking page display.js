@@ -40,29 +40,29 @@ const test = {
             })
     },
 
-    'Validator list show average non-zero stakes': function(browser) {
-        return browser
-            .waitForElementPresent('.average_stake_cell', 4000)
-            .elements('css selector', '.average_stake_cell', (res) => {
-                res.value.map(e => e.ELEMENT)
-                    .forEach(id => {
-                        browser.elementIdText(id, result => {
-                            browser.assert.ok(parseFloat(result.value.replace(',', '.')) > 0);
-                        })
-                    })
-            })
-    },
+    // 'Validator list show average non-zero stakes': function(browser) {
+    //     return browser
+    //         .waitForElementPresent('.average_stake_cell', 4000)
+    //         .elements('css selector', '.average_stake_cell', (res) => {
+    //             res.value.map(e => e.ELEMENT)
+    //                 .forEach(id => {
+    //                     browser.elementIdText(id, result => {
+    //                         browser.assert.ok(parseFloat(result.value.replace(',', '.')) > 0);
+    //                     })
+    //                 })
+    //         })
+    // },
 
-  // 'Total stake display and non-zero': function(browser) {
-  //   browser
-  //       .waitForElementNotPresent('.tm-data-msg__text', 4000)
-  //       .waitForElementPresent('#validators_total_stake', 4000)
-  //       .getText('#validators_total_stake', (res) => {
-  //         const totalStake = res.value.split(': ')[1].split('ONE')[0];
-  //
-  //         browser.assert.ok(parseFloat(totalStake.replace(',', '.')) > 0);
-  //       })
-  // },
+  'Total stake display and non-zero': function(browser) {
+    browser
+        .waitForElementNotPresent('.tm-data-msg__text', 4000)
+        .waitForElementPresent('#validators_total_stake', 4000)
+        .getText('#validators_total_stake', (res) => {
+          const totalStake = res.value.split(': ')[1].split('ONE')[0];
+
+          browser.assert.ok(parseFloat(totalStake.replace(',', '')) > 0);
+        })
+  },
 
     'Click to first Validator row': function(browser) {
         return browser

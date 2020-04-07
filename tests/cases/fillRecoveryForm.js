@@ -5,5 +5,6 @@ module.exports = function (browser, extensionUrl, params) {
         .setValue('input[name=account]', params.name)
         .setValue('input[name=password]', params.password)
         .setValue('input[name=confirm-password]', params.password)
-        .setValue('div[name=phrase] textarea', params.phrase)
+        .useXpath().click(`//*[contains(text(), 'Private key')]`).useCss()
+        .setValue('div[name=private-key] textarea', params.privateKey)
 };

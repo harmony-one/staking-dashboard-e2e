@@ -10,6 +10,7 @@ const account = {
     name: 'test-account',
     password: '1234567890',
     phrase: 'wise category remind orbit short mimic sign adjust siege fossil swear elephant',
+    privateKey: "570cd8e68e67e5d4ece4d2ceef1d760ce1dba508114dc511a7d87fdda8fcf6d6",
 }
 
 const extensionUrl = `chrome-extension://${EXTENSION_ID}/assets/popup.html`;
@@ -59,7 +60,6 @@ const test = {
             .waitForElementPresent('div.user-box', 4000)
             .click('#menu_item_portfolio')
             .waitForElementPresent('div.total-atoms', 4000)
-            //.assert.containsText('div.total-atoms > h2.total-atoms__value', '0')
     },
 };
 
